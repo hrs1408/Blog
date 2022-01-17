@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>
+        List User
+    </title>
+    <th:block th:replace="~{admin/fragments/css_js :: styles}"></th:block>
+</head>
+<body class="g-sidenav-show  bg-gray-200">
+<th:block th:replace="~{admin/fragments/header :: header_admin}"></th:block>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <th:block th:replace="~{admin/fragments/navbar :: navbar}"></th:block>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">Edit user</h6>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <form action="#" th:action="@{/user/save-user}" th:object="${user}" method="post" novalidate="novalidate">
+                                <div class="container">
+                                    <hr>
+                                    <input type="hidden" th:field="*{id}"/>
+                                    <label for="userName"><b>User Name</b></label>
+                                    <input type="text" class="form-control border" placeholder="Enter User Name" name="userName"
+                                           id="userName" th:field="*{userName}" required>
+                                    <p  th:if="${#fields.hasErrors('userName')}" th:class="${#fields.hasErrors('userName')}? error" class="text-danger">
+                                        Invalid username</p>
+                                    <br>
+                                    <label for="passWord"><b>Password</b></label>
+                                    <input type="password" class="form-control border" placeholder="Enter Password" name="passWord"
+                                           id="passWord" th:field="*{passWord}" required>
+                                    <p  th:if="${#fields.hasErrors('passWord')}" th:class="${#fields.hasErrors('passWord')}? error" class="text-danger">
+                                        Invalid password</p>
+                                    <br>
+                                    <label for="fullName"><b>Full Name</b></label>
+                                    <input type="text" class="form-control border" placeholder="&ensp; Enter Full Name" name="fullName"
+                                           id="fullName" th:field="*{fullName}" required>
+                                    <p  th:if="${#fields.hasErrors('fullName')}" th:class="${#fields.hasErrors('fullName')}? error" class="text-danger">
+                                        Invalid full name</p>
+                                    <br>
+                                    <label for="email"><b>Email</b></label>
+                                    <input type="text" class="form-control border" placeholder="&ensp; Enter Email" name="email"
+                                           id="email" th:field="*{email}" required>
+                                    <p  th:if="${#fields.hasErrors('email')}" th:class="${#fields.hasErrors('email')}? error" class="text-danger">
+                                        Invalid email</p>
+                                    <label><b>Role</b></label>
+                                    <select class="form-select border" aria-label="Default select example" name="role" required>
+                                        <option value=true>&ensp; Administrator</option>
+                                        <option value=false>&ensp; User</option>
+                                    </select>
+
+                                    <br>
+                                    <label><b>Status</b></label>
+                                    <select class="form-select border" aria-label="Default select example" name="status" required>
+                                        <option value=true>&ensp; Online</option>
+                                        <option value=false>&ensp; Offline</option>
+                                    </select>
+
+                                    <br>
+                                    <hr>
+                                    <button type="submit" class="btn btn-dark text-white">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="~{admin/fragments/footer :: footer_admin}"></th:block>
+</main>
+<th:block th:replace="~{admin/fragments/css_js :: scripts}"></th:block>
+</body>
+</html>

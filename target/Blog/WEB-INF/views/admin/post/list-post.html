@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>
+        List User
+    </title>
+    <th:block th:replace="~{admin/fragments/css_js :: styles}"></th:block>
+</head>
+<body class="g-sidenav-show  bg-gray-200">
+<th:block th:replace="~{admin/fragments/header :: header_admin}"></th:block>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <th:block th:replace="~{admin/fragments/navbar :: navbar}"></th:block>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">Authors table</h6>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <a th:href="@{add-post}" class="text-white font-weight-bold text-xs btn btn-dark ms-3" data-toggle="tooltip" data-original-title="Add post">
+                            Add Post
+                        </a>
+                        <div class="mb-5 ps-3">
+                            <h6 class="mb-1">Post</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                               <th:block th:each="post, iStat:${posts}">
+                                   <div class="card card-blog card-plain mt-3 card-border">
+                                       <div class="card-header p-0 mt-n4 mx-3">
+                                           <a class="d-block shadow-xl border-radius-xl">
+                                               <img src="https://images.unsplash.com/photo-1606744824163-985d376605aa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                                    alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                                           </a>
+                                       </div>
+                                       <div class="card-body p-3">
+                                           <a href="javascript:;">
+                                               <h5 th:text="${post.getTitle()}">
+                                               </h5>
+                                           </a>
+                                           <p class="mb-4 text-sm" th:text="${post.getContent()}">
+                                           </p>
+                                           <p class="mb-4 text-sm" th:text="${post.getCreateAt()}">
+                                           </p>
+                                           <div class="d-flex align-items-center justify-content-between">
+                                               <a type="button" class="btn btn-outline-primary btn-sm mb-0">View
+                                                   Post
+                                               </a>
+                                               <a th:href="@{edit-post/{postId}(postId = ${post.id})}" class="btn btn-outline-primary btn-sm mb-0" data-toggle="tooltip" data-original-title="Edit post">
+                                                   Edit
+                                               </a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="~{admin/fragments/footer :: footer_admin}"></th:block>
+</main>
+<th:block th:replace="~{admin/fragments/css_js :: scripts}"></th:block>
+</body>
+</html>

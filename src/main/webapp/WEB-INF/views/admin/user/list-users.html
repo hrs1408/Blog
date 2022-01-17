@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>
+        List User
+    </title>
+    <th:block th:replace="~{admin/fragments/css_js :: styles}"></th:block>
+</head>
+<body class="g-sidenav-show  bg-gray-200">
+<th:block th:replace="~{admin/fragments/header :: header_admin}"></th:block>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+   <th:block th:replace="~{admin/fragments/navbar :: navbar}"></th:block>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">List user</h6>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <a th:href="@{add-user}" class="text-white font-weight-bold text-xs btn btn-dark ms-3" data-toggle="tooltip" data-original-title="Add user">
+                                Add User
+                            </a>
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acction</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <th:block th:each="user, iStat:${users}">
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm" th:text="${user.getFullName()}"></h6>
+                                                    <p class="text-xs text-secondary mb-0" th:text="${user.getEmail()}"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0" th:text="${user.isRole()} ? 'ADMIN' : 'USER'"></p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span th:class="'badge badge-sm ' + ${user.isStatus() ? 'bg-gradient-success' : 'bg-gradient-danger'} " th:text="${user.isStatus()} ? 'ONLINE' : 'OFFLINE'" ></span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <a th:href="@{edit-user/{userId}(userId = ${user.id})}" class="text-white font-weight-bold text-xs btn btn-dark" data-toggle="tooltip" data-original-title="Edit user">
+                                                Edit
+                                            </a>
+                                            <a th:href="@{delete-user/{userId}(userId = ${user.id})}" class="text-white font-weight-bold text-xs btn btn-dark" data-toggle="tooltip" data-original-title="Remove user" onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false">
+                                                Remove
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="~{admin/fragments/footer :: footer_admin}"></th:block>
+</main>
+<th:block th:replace="~{admin/fragments/css_js :: scripts}"></th:block>
+</body>
+</html>
